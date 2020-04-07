@@ -17,7 +17,7 @@ async def is_owner(ctx):
 
 
 class Pruner(commands.Cog):
-  """Provide a voice queue where only one person can talk at a time."""
+  """Member management to remove inactive and grant access on activity."""
 
   qualified_name = 'Prune Inactive Accounts'
   # None for no greeting, otherwise the welcome channel.
@@ -64,6 +64,8 @@ class Pruner(commands.Cog):
       pass
     elif message.is_system():
       pass
+    elif isinstance(message.author, discord.User):
+      logging.info('Message from User %s: %s' % (message.author.name, message.content))
     elif self.member_role not in message.author.roles:
       logging.info('Giving "%s" role to %s' % (self.member_role.name, message.author.display_name))
       await message.author.add_roles(self.member_role)
