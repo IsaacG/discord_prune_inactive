@@ -1,5 +1,5 @@
 #!/bin/python
 
-from . import bot
+from . import pruner
 
-Pruner = bot.Pruner
+Pruner = pruner.Pruner
