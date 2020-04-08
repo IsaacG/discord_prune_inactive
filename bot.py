@@ -3,9 +3,7 @@
 import collections
 import datetime
 import discord
-import dotenv
 import enum
-import logging
 import os
 import sys
 
@@ -65,9 +63,8 @@ class Pruner(commands.Cog):
     elif message.is_system():
       pass
     elif isinstance(message.author, discord.User):
-      logging.info('Message from User %s: %s' % (message.author.name, message.content))
+      pass
     elif self.member_role not in message.author.roles:
-      logging.info('Giving "%s" role to %s' % (self.member_role.name, message.author.display_name))
       await message.author.add_roles(self.member_role)
 
   @commands.command()
@@ -139,11 +136,6 @@ class Pruner(commands.Cog):
 
 
 def main():
-  if sys.stdout.isatty():
-    logging.basicConfig(stream=sys.stdout, level=logging.INFO)
-  else:
-    logging.basicConfig(stream=sys.stderr, level=logging.WARNING)
-  dotenv.load_dotenv()
   bot = commands.Bot(command_prefix='!')
   bot.add_cog(Pruner())
   bot.run(os.getenv('DISCORD_TOKEN'))
